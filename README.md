@@ -151,7 +151,7 @@ WHERE
 
 The following SQL queries were developed to answer specific business questions:
 
-1. **Emily would like to know how many bikes the shop owns by category. Can you get this for her? 
+1. **Jessica would like to know how many bikes the shop owns by category. Can you get this for her? 
 Display the category name and the number of bikes the shop owns in each category (call this column number_of_bikes ).
 Show only the categories where the number of bikes is greater than 2 .**:
 ```sql
@@ -161,7 +161,7 @@ group by category
 having count(1) > 2;
 ```
 
-2. **Emily needs a list of customer names with the total number of memberships purchased by each. For each customer, display the customer's name and the count of memberships purchased (call this column membership_count ). Sort the results by membership_count , starting with the customer who has purchased the highest number of memberships.
+2. **Jessica needs a list of customer names with the total number of memberships purchased by each. For each customer, display the customer's name and the count of memberships purchased (call this column membership_count ). Sort the results by membership_count , starting with the customer who has purchased the highest number of memberships.
 Keep in mind that some customers may not have purchased any memberships yet. In such a situation, display 0 for the membership_count .**:
 ```sql
 select c.name, count(m.id) as membership_count 
@@ -171,7 +171,7 @@ group by c.name
 order by count(1) desc;
 ```
 
-3. **Emily is working on a special offer for the winter months. Can you help her prepare a list of new rental prices? For each bike, display its ID, category,
+3. **Jessica is working on a special offer for the winter months. Can you help her prepare a list of new rental prices? For each bike, display its ID, category,
 old price per hour (call this column old_price_per_hour ), discounted price per hour (call it new_price_per_hour ), old price per day (call it old_price_per_day ),
 and discounted price per day (call it new_price_per_day ).
 Electric bikes should have a 10% discount for hourly rentals and a 20% discount for daily rentals. Mountain bikes should have a 20% discount for hourly rentals and a
@@ -191,7 +191,7 @@ Electric bikes should have a 10% discount for hourly rentals and a 20% discount 
   from bike;
 ```
 
-4. **Emily is looking for counts of the rented bikes and of the available bikes in each category. Display the number of available bikes (call this column  available_bikes_count ) and
+4. **Jessica is looking for counts of the rented bikes and of the available bikes in each category. Display the number of available bikes (call this column  available_bikes_count ) and
 the number of rented bikes (call this column rented_bikes_count ) by bike category..**:
 ```sql
 select category,
@@ -201,7 +201,7 @@ from bike
 group by category;
 ```
 
-5. **Emily is preparing a sales report. She needs to know the total reven from rentals by month, the total by year, and the all-time across all the years.
+5. **Jessica is preparing a sales report. She needs to know the total reven from rentals by month, the total by year, and the all-time across all the years.
 Display the total revenue from rentals for each month, the total for each year, and the total across all the years. Do not take memberships into account.
 There should be 3 columns: year , month , and revenue . Sort the results chronologically.
 Display the year total after all the month totals for the corresponding year. Show the all-time total as the last row.**:
@@ -222,7 +222,7 @@ from rental
 order by year, month;
 ```
 
-6. **Emily has asked you to get the total revenue from memberships for each combination of year, month, and membership type.
+6. **Jessica has asked you to get the total revenue from memberships for each combination of year, month, and membership type.
 Display the year, the month, the name of the membership type (call this column membership_type_name ), and the total revenue (call this column total_revenue ) for every combination of year, month, and membership type. Sort the results by year, month, and name of membership type.**:
 ```sql
 select extract(year from start_date) as year,
@@ -236,7 +236,7 @@ order by year, month, mt.name
 
 ```
 
-7. **Next, Emily would like data about memberships purchased in 2023, with subtotals and grand totals for all the different combinations of membership types and months.
+7. **Next, Jessica would like data about memberships purchased in 2023, with subtotals and grand totals for all the different combinations of membership types and months.
 Display the total revenue from memberships purchased in 2023 for each combination of month and membership type. Generate subtotals and grand totals for all possible combinations.
 There should be 3 columns: membership_type_name , month , and total_revenue . Sort the results by membership type name alphabetically and then chronologically by month**:
 ```sql
@@ -250,7 +250,7 @@ group by CUBE(membership_type_name, month)
 order by membership_type_name, month;
 ```
 
-8. **Emily wants to segment customers based on the number of rentals and
+8. **Jessica wants to segment customers based on the number of rentals and
 see the count of customers in each segment. Categorize customers based on their rental history as follows:
 Customers who have had more than 10 rentals are categorized as 'more than 10' .
 Customers who have had 5 to 10 rentals (inclusive) are categorized as 'between 5 and 10' .

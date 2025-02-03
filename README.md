@@ -275,15 +275,15 @@ order by customer_count;
 
 ## Findings
 
-- **Customer Demographics**: The dataset includes customers from various age groups, with sales distributed across different categories such as Clothing and Beauty.
-- **High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
+- **Customer Demographics**: The dataset includes customers, with sales distributed across different categories such as mountain bike, road bike, hybrid and electric.
+- **High-Value Transactions**: Several transactions had a total amount greater than 400, indicating premium membership purchases.
 - **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
 - **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
 
 ## Reports
 
 - **Sales Summary**: A detailed report summarizing total sales, customer demographics, and category performance.
-- **Trend Analysis**: Insights into sales trends across different months and shifts.
+- **Trend Analysis**: Insights into sales trends across different model and category.
 - **Customer Insights**: Reports on top customers and unique customer counts per category.
 
 ## Conclusion

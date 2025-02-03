@@ -225,10 +225,10 @@ order by year, month;
 6. **Emily has asked you to get the total revenue from memberships for each combination of year, month, and membership type.
 Display the year, the month, the name of the membership type (call this column membership_type_name ), and the total revenue (call this column total_revenue ) for every combination of year, month, and membership type. Sort the results by year, month, and name of membership type.**:
 ```sql
-select extract(year from start_date) as year
-, extract(month from start_date) as month
-, mt.name as membership_type_name
-, sum(total_paid) as total_revenue
+select extract(year from start_date) as year,
+extract(month from start_date) as month,
+mt.name as membership_type_name,
+sum(total_paid) as total_revenue
 from membership m
 join membership_type mt on m.membership_type_id = mt.id
 group by year, month, mt.name
@@ -240,9 +240,9 @@ order by year, month, mt.name
 Display the total revenue from memberships purchased in 2023 for each combination of month and membership type. Generate subtotals and grand totals for all possible combinations.
 There should be 3 columns: membership_type_name , month , and total_revenue . Sort the results by membership type name alphabetically and then chronologically by month**:
 ```sql
-select mt.name as membership_type_name
-, extract(month from start_date) as month
-, sum(total_paid) as total_revenue
+select mt.name as membership_type_name,
+extract(month from start_date) as month,
+sum(total_paid) as total_revenue
 from membership m
 join membership_type mt on m.membership_type_id = mt.id
 where extract(year from start_date) = 2023
@@ -259,15 +259,15 @@ Calculate the number of customers in each category.
 Display two columns: rental_count_category (the rental count category) and customer_count (the number of customers in each category).**:
 ```sql
 with cte as 
-    (select customer_id, count(1)
-    , case when count(1) > 10 then 'more than 10' 
-           when count(1) between 5 and 10 then 'between 5 and 10'
-           else 'fewer than 5'
-      end as category
-    from rental
-    GROUP by customer_id)
-select category as rental_count_category
-, count(*) as customer_count
+(select customer_id, count(1),
+case when count(1) > 10 then 'more than 10' 
+when count(1) between 5 and 10 then 'between 5 and 10'
+else 'fewer than 5'
+end as category
+from rental
+GROUP by customer_id)
+select category as rental_count_category,
+count(*) as customer_count
 from cte 
 group by category
 order by customer_count;

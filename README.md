@@ -276,7 +276,7 @@ order by customer_count;
 ## Findings
 
 - **Customer Demographics**: The dataset includes customers, with sales distributed across different categories such as mountain bike, road bike, hybrid and electric.
-- **High-Value Transactions**: Several transactions had a total amount greater than 400, indicating premium membership purchases.
+- **High-Value Membership**: Several membership had a total amount greater than 400, indicating premium membership purchases.
 - **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
 - **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
 

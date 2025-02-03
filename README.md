@@ -1,29 +1,31 @@
-# Bike-rental SQL Projcet
+# Bike-rental SQL Project
 
 ## Project Overview
 
-**Project Title**: Retail Sales Analysis  
-**Level**: Beginner  
-**Database**: `p1_retail_db`
-
-This project is designed to demonstrate SQL skills and techniques typically used by data analysts to explore, clean, and analyze retail sales data. The project involves setting up a retail sales database, performing exploratory data analysis (EDA), and answering specific business questions through SQL queries. This project is ideal for those who are starting their journey in data analysis and want to build a solid foundation in SQL.
+**Project Title**: Bike Rental Analysis  
+**Database**: `Bike Rentals`
 
 ## Objectives
 
-1. **Set up a retail sales database**: Create and populate a retail sales database with the provided sales data.
+1. **Set up a bike rentals database**: Create and populate a bike rentals database with the provided data.
 2. **Data Cleaning**: Identify and remove any records with missing or null values.
 3. **Exploratory Data Analysis (EDA)**: Perform basic exploratory data analysis to understand the dataset.
-4. **Business Analysis**: Use SQL to answer specific business questions and derive insights from the sales data.
+4. **Business Analysis**: Use SQL to answer specific business questions and derive insights from the data.
 
   ## Project Structure
 
 ### 1. Database Setup
 
-- **Database Creation**: The project starts by creating a database named `p1_retail_db`.
-- **Table Creation**: A table named `retail_sales` is created to store the sales data. The table structure includes columns for transaction ID, sale date, sale time, customer ID, gender, age, product category, quantity sold, price per unit, cost of goods sold (COGS), and total sale amount.
+- **Database Creation**: The project starts by creating a database named `Bike Rentals`.
+- **Table Creation**: A table named `customer` is created to store the sales data. The table structure includes columns for id, name, email
+- **Table Creation**: A table named `bike` is created to store the sales data. The table structure includes columns for id, model, category, price_per_hour, price_per_day, status
+- **Table Creation**: A table named `rental` is created to store the sales data. The table structure includes columns for id, customer_id, bike_id, start_timestamp, duration, total_paid
+- **Table Creation**: A table named `membership_type` is created to store the sales data. The table structure includes columns for id, name, description, price
+- **Table Creation**: A table named `membership` is created to store the sales data. The table structure includes columns for id, membership_type_id,customer_id, start_date,end_date, total_paid
+
 
 ```sql
-CREATE DATABASE p1_retail_db;
+CREATE DATABASE Bike Rentals;
 
 drop table if exists customer;
 create table customer
@@ -208,6 +210,6 @@ LIMIT 5
 - **Trend Analysis**: Insights into sales trends across different months and shifts.
 - **Customer Insights**: Reports on top customers and unique customer counts per category.
 
-  ## Conclusion
+## Conclusion
 
 This project serves as a comprehensive introduction to SQL for data analysts, covering database setup, data cleaning, exploratory data analysis, and business-driven SQL queries. The findings from this project can help drive business decisions by understanding sales patterns, customer behavior, and product performance.

@@ -231,15 +231,27 @@ GROUP BY 1, 2
 WHERE rank = 1
 ```
 
-8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
+8. **Emily wants to segment customers based on the number of rentals and
+see the count of customers in each segment. Categorize customers based on their rental history as follows:
+Customers who have had more than 10 rentals are categorized as 'more than 10' .
+Customers who have had 5 to 10 rentals (inclusive) are categorized as 'between 5 and 10' .
+Customers who have had fewer than 5 rentals should be categorized as 'fewer than 5' .
+Calculate the number of customers in each category.
+Display two columns: rental_count_category (the rental count category) and customer_count (the number of customers in each category).**:
 ```sql
-SELECT 
-    customer_id,
-    SUM(total_sale) as total_sales
-FROM retail_sales
-GROUP BY 1
-ORDER BY 2 DESC
-LIMIT 5
+with cte as 
+    (select customer_id, count(1)
+    , case when count(1) > 10 then 'more than 10' 
+           when count(1) between 5 and 10 then 'between 5 and 10'
+           else 'fewer than 5'
+      end as category
+    from rental
+    GROUP by customer_id)
+select category as rental_count_category
+, count(*) as customer_count
+from cte 
+group by category
+order by customer_count;
 ```
 
 ## Findings

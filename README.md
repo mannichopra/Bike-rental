@@ -177,26 +177,26 @@ and discounted price per day (call it new_price_per_day ).
 Electric bikes should have a 10% discount for hourly rentals and a 20% discount for daily rentals. Mountain bikes should have a 20% discount for hourly rentals and a
 50% discount for daily rentals. All other bikes should have a 50% discount for all types of rentals. Round the new prices to 2 decimal digits.**:
 ```sql
-select id, category
-, price_per_hour as old_price_per_hour
-, case when category = 'electric' then round(price_per_hour - (price_per_hour*0.1) ,2)
-	   when category = 'mountain bike' then round(price_per_hour - (price_per_hour*0.2) ,2)
-       else round(price_per_hour - (price_per_hour*0.5) ,2)
-  end as new_price_per_hour
-, price_per_day as old_price_per_day
-, case when category = 'electric' then round(price_per_day - (price_per_day*0.2) ,2)
-	   when category = 'mountain bike' then round(price_per_day - (price_per_day*0.5) ,2)
-       else round(price_per_day - (price_per_day*0.5) ,2)
+  select id, category,
+  price_per_hour as old_price_per_hour,
+  case when category = 'electric' then round(price_per_hour - (price_per_hour*0.1) ,2)
+  when category = 'mountain bike' then round(price_per_hour - (price_per_hour*0.2) ,2)
+  else round(price_per_hour - (price_per_hour*0.5) ,2)
+  end as new_price_per_hour,
+  price_per_day as old_price_per_day,
+  case when category = 'electric' then round(price_per_day - (price_per_day*0.2) ,2)
+  when category = 'mountain bike' then round(price_per_day - (price_per_day*0.5) ,2)
+  else round(price_per_day - (price_per_day*0.5) ,2)
   end as new_price_per_day
-from bike;
+  from bike;
 ```
 
 4. **Emily is looking for counts of the rented bikes and of the available bikes in each category. Display the number of available bikes (call this column  available_bikes_count ) and
 the number of rented bikes (call this column rented_bikes_count ) by bike category..**:
 ```sql
-select category
-, count(case when status ='available' then 1 end) as available_bikes_count
-, count(case when status ='rented' then 1 end) as rented_bikes_count
+select category,
+count(case when status ='available' then 1 end) as available_bikes_count,
+count(case when status ='rented' then 1 end) as rented_bikes_count
 from bike
 group by category;
 ```
@@ -206,14 +206,14 @@ Display the total revenue from rentals for each month, the total for each year, 
 There should be 3 columns: year , month , and revenue . Sort the results chronologically.
 Display the year total after all the month totals for the corresponding year. Show the all-time total as the last row.**:
 ```sql
-select extract(year from start_timestamp) as year
-, extract(month from start_timestamp) as month
-, sum(total_paid) as revenue
+select extract(year from start_timestamp) as year,
+extract(month from start_timestamp) as month,
+sum(total_paid) as revenue
 from rental
 group by extract(year from start_timestamp), extract(month from start_timestamp)
 union all
-select extract(year from start_timestamp) as year
-, null as month, sum(total_paid) as revenue
+select extract(year from start_timestamp) as year,
+null as month, sum(total_paid) as revenue
 from rental
 group by extract(year from start_timestamp)
 union all

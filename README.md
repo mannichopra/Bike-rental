@@ -174,14 +174,24 @@ WHERE
     quantity >= 4
 ```
 
-3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
+3. ** Emily is working on a special offer for the winter months. Can you help her prepare a list of new rental prices? For each bike, display its ID, category,
+old price per hour (call this column old_price_per_hour ), discounted price per hour (call it new_price_per_hour ), old price per day (call it old_price_per_day ),
+and discounted price per day (call it new_price_per_day ).
+Electric bikes should have a 10% discount for hourly rentals and a 20% discount for daily rentals. Mountain bikes should have a 20% discount for hourly rentals and a
+50% discount for daily rentals. All other bikes should have a 50% discount for all types of rentals. Round the new prices to 2 decimal digits..**:
 ```sql
-SELECT 
-    category,
-    SUM(total_sale) as net_sale,
-    COUNT(*) as total_orders
-FROM retail_sales
-GROUP BY 1
+select id, category
+, price_per_hour as old_price_per_hour
+, case when category = 'electric' then round(price_per_hour - (price_per_hour*0.1) ,2)
+	   when category = 'mountain bike' then round(price_per_hour - (price_per_hour*0.2) ,2)
+       else round(price_per_hour - (price_per_hour*0.5) ,2)
+  end as new_price_per_hour
+, price_per_day as old_price_per_day
+, case when category = 'electric' then round(price_per_day - (price_per_day*0.2) ,2)
+	   when category = 'mountain bike' then round(price_per_day - (price_per_day*0.5) ,2)
+       else round(price_per_day - (price_per_day*0.5) ,2)
+  end as new_price_per_day
+from bike;
 ```
 
 4. **Emily is looking for counts of the rented bikes and of the available bikes in each category. Display the number of available bikes (call this column  available_bikes_count ) and

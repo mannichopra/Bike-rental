@@ -192,24 +192,40 @@ FROM retail_sales
 WHERE category = 'Beauty'
 ```
 
-5. **Write a SQL query to find all transactions where the total_sale is greater than 1000.**:
+5. **Emily is preparing a sales report. She needs to know the total reven from rentals by month, the total by year, and the all-time across all the years.
+Display the total revenue from rentals for each month, the total for each year, and the total across all the years. Do not take memberships into account.
+There should be 3 columns: year , month , and revenue . Sort the results chronologically.
+Display the year total after all the month totals for the corresponding year. Show the all-time total as the last row.**:
 ```sql
-SELECT * FROM retail_sales
-WHERE total_sale > 1000
+SOL1 using Group by and Union all: 
+select extract(year from start_timestamp) as year
+, extract(month from start_timestamp) as month
+, sum(total_paid) as revenue
+from rental
+group by extract(year from start_timestamp), extract(month from start_timestamp)
+union all
+select extract(year from start_timestamp) as year
+, null as month, sum(total_paid) as revenue
+from rental
+group by extract(year from start_timestamp)
+union all
+select null as year, null as month, sum(total_paid) as revenue
+from rental
+order by year, month;
 ```
 
-6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
+6. **Emily has asked you to get the total revenue from memberships for each combination of year, month, and membership type.
+Display the year, the month, the name of the membership type (call this column membership_type_name ), and the total revenue (call this column total_revenue ) for every combination of year, month, and membership type. Sort the results by year, month, and name of membership type.**:
 ```sql
-SELECT 
-    category,
-    gender,
-    COUNT(*) as total_trans
-FROM retail_sales
-GROUP 
-    BY 
-    category,
-    gender
-ORDER BY 1
+select extract(year from start_date) as year
+, extract(month from start_date) as month
+, mt.name as membership_type_name
+, sum(total_paid) as total_revenue
+from membership m
+join membership_type mt on m.membership_type_id = mt.id
+group by year, month, mt.name
+order by year, month, mt.name
+
 ```
 
 7. **Next, Emily would like data about memberships purchased in 2023, with subtotals and grand totals for all the different combinations of membership types and months.

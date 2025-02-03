@@ -184,12 +184,14 @@ FROM retail_sales
 GROUP BY 1
 ```
 
-4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
+4. **Emily is looking for counts of the rented bikes and of the available bikes in each category. Display the number of available bikes (call this column  available_bikes_count ) and
+the number of rented bikes (call this column rented_bikes_count ) by bike category..**:
 ```sql
-SELECT
-    ROUND(AVG(age), 2) as avg_age
-FROM retail_sales
-WHERE category = 'Beauty'
+select category
+, count(case when status ='available' then 1 end) as available_bikes_count
+, count(case when status ='rented' then 1 end) as rented_bikes_count
+from bike
+group by category;
 ```
 
 5. **Emily is preparing a sales report. She needs to know the total reven from rentals by month, the total by year, and the all-time across all the years.
@@ -197,7 +199,6 @@ Display the total revenue from rentals for each month, the total for each year, 
 There should be 3 columns: year , month , and revenue . Sort the results chronologically.
 Display the year total after all the month totals for the corresponding year. Show the all-time total as the last row.**:
 ```sql
-SOL1 using Group by and Union all: 
 select extract(year from start_timestamp) as year
 , extract(month from start_timestamp) as month
 , sum(total_paid) as revenue

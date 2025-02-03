@@ -212,23 +212,18 @@ GROUP
 ORDER BY 1
 ```
 
-7. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year**:
+7. **Next, Emily would like data about memberships purchased in 2023, with subtotals and grand totals for all the different combinations of membership types and months.
+Display the total revenue from memberships purchased in 2023 for each combination of month and membership type. Generate subtotals and grand totals for all possible combinations.
+There should be 3 columns: membership_type_name , month , and total_revenue . Sort the results by membership type name alphabetically and then chronologically by month**:
 ```sql
-SELECT 
-       year,
-       month,
-    avg_sale
-FROM 
-(    
-SELECT 
-    EXTRACT(YEAR FROM sale_date) as year,
-    EXTRACT(MONTH FROM sale_date) as month,
-    AVG(total_sale) as avg_sale,
-    RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) as rank
-FROM retail_sales
-GROUP BY 1, 2
-) as t1
-WHERE rank = 1
+select mt.name as membership_type_name
+, extract(month from start_date) as month
+, sum(total_paid) as total_revenue
+from membership m
+join membership_type mt on m.membership_type_id = mt.id
+where extract(year from start_date) = 2023
+group by CUBE(membership_type_name, month)
+order by membership_type_name, month;
 ```
 
 8. **Emily wants to segment customers based on the number of rentals and

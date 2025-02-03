@@ -88,21 +88,63 @@ create table membership
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
 ```sql
-SELECT COUNT(*) FROM retail_sales;
-SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
-SELECT DISTINCT category FROM retail_sales;
+SELECT COUNT(*) FROM customer;
+SELECT COUNT(DISTINCT customer_id) FROM rental;
+SELECT DISTINCT category FROM bike;
 
-SELECT * FROM retail_sales
+SELECT * FROM customer
 WHERE 
-    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
-    gender IS NULL OR age IS NULL OR category IS NULL OR 
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
+    id IS NULL OR name IS NULL OR email IS NULL
 
-DELETE FROM retail_sales
+SELECT * FROM bike
 WHERE 
-    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
-    gender IS NULL OR age IS NULL OR category IS NULL OR 
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
+    id IS NULL OR model IS NULL OR category IS NULL
+    OR price_per_hour IS NULL OR price_per_day IS NULL
+    OR status IS NULL
+
+SELECT * FROM rental
+WHERE 
+    id IS NULL OR customer_id IS NULL OR bike_id IS NULL
+    OR start_timestamp IS NULL OR duration IS NULL
+    OR total_paid IS NULL
+
+SELECT * FROM membership
+WHERE 
+    id IS NULL OR membership_type_id IS NULL OR customer_id IS NULL
+    OR start_date IS NULL OR end_date IS NULL
+    OR total_paid IS NULL
+
+SELECT * FROM membership_type
+WHERE 
+    id IS NULL OR name IS NULL OR description IS NULL
+    OR price IS NULL
+
+DELETE FROM customer
+WHERE 
+    id IS NULL OR name IS NULL OR email IS NULL
+
+DELETE FROM bike
+WHERE 
+    id IS NULL OR model IS NULL OR category IS NULL
+    OR price_per_hour IS NULL OR price_per_day IS NULL
+    OR status IS NULL
+
+DELETE FROM rental
+WHERE 
+    id IS NULL OR customer_id IS NULL OR bike_id IS NULL
+    OR start_timestamp IS NULL OR duration IS NULL
+    OR total_paid IS NULL
+
+DELETE FROM membership
+WHERE 
+    id IS NULL OR membership_type_id IS NULL OR customer_id IS NULL
+    OR start_date IS NULL OR end_date IS NULL
+    OR total_paid IS NULL
+
+DELETE FROM membership_type
+WHERE 
+    id IS NULL OR name IS NULL OR description IS NULL
+    OR price IS NULL
 ```
 
 ### 3. Data Analysis & Findings

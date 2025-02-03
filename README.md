@@ -109,11 +109,14 @@ WHERE
 
 The following SQL queries were developed to answer specific business questions:
 
-1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
+1. **Emily would like to know how many bikes the shop owns by category. Can you get this for her? 
+Display the category name and the number of bikes the shop owns in each category (call this column number_of_bikes ).
+Show only the categories where the number of bikes is greater than 2 .**:
 ```sql
-SELECT *
-FROM retail_sales
-WHERE sale_date = '2022-11-05';
+select category, count(1) as number_of_bikes 
+from bike
+group by category
+having count(1) > 2;
 ```
 
 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
